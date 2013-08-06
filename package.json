@@ -1,0 +1,25 @@
+{
+  "name": "cake-dog",
+  "version": "0.0.0",
+  "description": "a little dog to watch, compile your coffee files",
+  "main": "lib/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sailxjx/cake-dog"
+  },
+  "keywords": [
+    "cake",
+    "coffee",
+    "nodejs",
+    "task"
+  ],
+  "author": "sailxjx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sailxjx/cake-dog/issues"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6.3"
+  }
+}

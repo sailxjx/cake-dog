@@ -1,0 +1,45 @@
+#!/bin/bash
+
+COFFEE="./node_modules/coffee-script/bin/coffee"
+PID_FILE='.coffee.pid'
+
+[[ ! -f ${COFFEE} ]] && echo "error! executable file not exist" && exit 1
+
+function watch {
+    echo 'watching'
+    [[ -f ${PID_FILE} ]] && echo "error! pid file exist" && exit 2
+    ${COFFEE} -w -o lib -c src 2>&1 1>/dev/null &
+    echo $! > ${PID_FILE}
+    [[ $? > 0 ]] && echo "error! coffee start failed" && exit 3
+    echo 'watched'
+}
+
+function stop {
+    echo 'stopping'
+    [ ! -f ${PID_FILE} ] && echo "error! no pid file found" && exit 2
+    kill $(cat ${PID_FILE}) && rm .coffee.pid
+    [[ $? > 0 ]] && echo "error! stop process error" && exit 3
+    echo "stoped"
+}
+
+function generate {
+    echo 'generating'
+    rm -rf lib/*
+    ${COFFEE} -o lib -c src
+    echo 'generated'
+}
+
+case $1 in
+    watch)
+        watch
+        ;;
+    stop)
+        stop
+        ;;
+    generate)
+        generate
+        ;;
+    *)
+        echo "function ${1} not found!" && exit 1
+        ;;
+esac
