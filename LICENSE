@@ -1,33 +1,3 @@
-# Cake Dog
-
-======
-
-a little dog help you to watch, compile your coffee files
-
-# Usage
-
-require the follow line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
-
-```
-require('cake-dog')
-```
-
-now use `cake` command to see new tasks
-
-```
-$ cake
-Cakefile defines the following tasks:
-
-cake watch                # real-time compile coffee scripts to javascript files
-cake stop                 # stop compile coffee scripts to javascript files
-cake generate             # once compile coffee scripts to javascript files
-
-```
-
-done
-
-# LICENSE
-
 Copyright © 2013 Tristan Xu, http://sailxjx.github.io <sailxjx@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
