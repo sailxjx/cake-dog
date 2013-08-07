@@ -1,6 +1,6 @@
 {
   "name": "cake-dog",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a little dog to watch, compile your coffee files",
   "main": "lib/index.js",
   "scripts": {},
@@ -20,6 +20,7 @@
     "url": "https://github.com/sailxjx/cake-dog/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "colors": "~0.6.1"
   }
 }
