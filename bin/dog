@@ -1,6 +1,7 @@
 #!/bin/bash
 
-COFFEE="./node_modules/coffee-script/bin/coffee"
+BASE_PATH="$(dirname $0)/.."
+COFFEE="${BASE_PATH}/node_modules/coffee-script/bin/coffee"
 PID_FILE='.coffee.pid'
 
 [[ ! -f ${COFFEE} ]] && echo "error! executable file not exist" && exit 1
