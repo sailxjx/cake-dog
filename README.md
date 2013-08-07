@@ -1,18 +1,22 @@
 # Cake Dog
 
-======
+A little dog help you to watch, compile your coffee files
 
-a little dog help you to watch, compile your coffee files
+# Install
+
+```
+npm install cake-dog
+```
 
 # Usage
 
-require the follow line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
+Require the follow line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
 
 ```
 require('cake-dog')
 ```
 
-now use `cake` command to see new tasks
+Now use `cake` command to see new tasks
 
 ```
 $ cake
@@ -24,7 +28,7 @@ cake generate             # once compile coffee scripts to javascript files
 
 ```
 
-done
+Done!
 
 # LICENSE
 
