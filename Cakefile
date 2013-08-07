@@ -1,1 +1,1 @@
-exports.tasks = require('./lib')
+require('./lib')

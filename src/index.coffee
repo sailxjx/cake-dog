@@ -1,7 +1,7 @@
 exec = require('child_process').exec
 spawn = require('child_process').spawn
 colors = require('colors')
-dogFile = './bin/dog'
+dogFile = "#{__dirname}/../bin/dog"
 
 callback = (err, stdout, stderr) ->
   if err?
