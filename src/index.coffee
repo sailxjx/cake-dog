@@ -1,5 +1,4 @@
 exec = require('child_process').exec
-spawn = require('child_process').spawn
 colors = require('colors')
 dogFile = "#{__dirname}/../bin/dog"
 
@@ -13,7 +12,7 @@ callback = (err, stdout, stderr) ->
   process.exit()
 
 task 'watch', 'real-time compile coffee scripts to javascript files', (options) ->
-  watch = exec("#{dogFile} watch", {timeout: 100}, callback)
+  exec("#{dogFile} watch", {timeout: 100}, callback)
 
 task 'stop', 'stop compile coffee scripts to javascript files', (options) ->
   exec("#{dogFile} stop", callback)
