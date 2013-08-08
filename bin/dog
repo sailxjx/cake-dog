@@ -1,24 +1,32 @@
 #!/bin/bash
 
-BASE_PATH="$(dirname $0)/.."
-COFFEE="${BASE_PATH}/node_modules/coffee-script/bin/coffee"
-PID_FILE='.coffee.pid'
+BASEPATH="$(dirname $0)/.."
+POSTFIX="/node_modules/coffee-script/bin/coffee"
+COFFEE="${BASEPATH}${POSTFIX}"
+PIDFILE='.coffee.pid'
 
-[[ ! -f ${COFFEE} ]] && echo "error! executable file not exist" && exit 1
+if [[ ! -f ${COFFEE} ]]; then
+    if [[ ! -f "$(pwd)${POSTFIX}" ]]; then
+        echo "error! executable file not exist"
+        exit 1
+    else
+        COFFEE="$(pwd)${POSTFIX}"
+    fi
+fi
 
 function watch {
     echo 'watching'
-    [[ -f ${PID_FILE} ]] && echo "error! pid file exist" && exit 2
+    [[ -f ${PIDFILE} ]] && echo "error! pid file exist" && exit 2
     ${COFFEE} -w -o lib -c src 2>&1 1>/dev/null &
-    echo $! > ${PID_FILE}
+    echo $! > ${PIDFILE}
     [[ $? > 0 ]] && echo "error! coffee start failed" && exit 3
     echo 'watched'
 }
 
 function stop {
     echo 'stopping'
-    [ ! -f ${PID_FILE} ] && echo "error! no pid file found" && exit 2
-    kill $(cat ${PID_FILE}) && rm .coffee.pid
+    [ ! -f ${PIDFILE} ] && echo "error! no pid file found" && exit 2
+    kill $(cat ${PIDFILE}) && rm .coffee.pid
     [[ $? > 0 ]] && echo "error! stop process error" && exit 3
     echo "stoped"
 }
