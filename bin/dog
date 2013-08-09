@@ -23,12 +23,12 @@ function watch {
     echo 'watched'
 }
 
-function stop {
-    echo 'stopping'
+function unwatch {
+    echo 'unwatching'
     [ ! -f ${PIDFILE} ] && echo "error! no pid file found" && exit 2
     kill $(cat ${PIDFILE}) && rm .coffee.pid
     [[ $? > 0 ]] && echo "error! stop process error" && exit 3
-    echo "stoped"
+    echo "unwatched"
 }
 
 function generate {
@@ -42,8 +42,8 @@ case $1 in
     watch)
         watch
         ;;
-    stop)
-        stop
+    unwatch)
+        unwatch
         ;;
     generate)
         generate

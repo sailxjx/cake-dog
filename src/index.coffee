@@ -14,8 +14,8 @@ callback = (err, stdout, stderr) ->
 task 'watch', 'real-time compile coffee scripts to javascript files', (options) ->
   exec("#{dogFile} watch", {timeout: 100}, callback)
 
-task 'stop', 'stop compile coffee scripts to javascript files', (options) ->
-  exec("#{dogFile} stop", callback)
+task 'unwatch', 'stop compile coffee scripts to javascript files', (options) ->
+  exec("#{dogFile} unwatch", callback)
 
 task 'generate', "once compile coffee scripts to javascript files", (options) ->
   exec("#{dogFile} generate", callback)
