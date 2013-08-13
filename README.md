@@ -10,7 +10,7 @@ npm install cake-dog
 
 # Usage
 
-npm will automatically prepend one line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
+Npm will automatically prepend one line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
 
 ```
 require("cake-dog")
