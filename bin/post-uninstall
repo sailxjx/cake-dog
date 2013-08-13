@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CAKEFILE="$(pwd)/../../Cakefile"
+
+[[ ! -f ${CAKEFILE} ]] && exit 0
+
+CAKETMP=$(grep -v 'require("cake-dog")' ${CAKEFILE})
+
+echo ${CAKETMP} > ${CAKEFILE}

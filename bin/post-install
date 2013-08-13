@@ -1,0 +1,7 @@
+#!/bin/bash
+
+CAKEFILE="$(pwd)/../../Cakefile"
+
+[[ ! -f ${CAKEFILE} ]] && touch ${CAKEFILE}
+
+grep "cake-dog" ${CAKEFILE} 1>/dev/null || echo 'require("cake-dog")' | cat - ${CAKEFILE} | tee 1>/dev/null ${CAKEFILE}
