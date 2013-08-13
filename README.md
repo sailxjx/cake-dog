@@ -10,10 +10,10 @@ npm install cake-dog
 
 # Usage
 
-Require the follow line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
+npm will automatically prepend one line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
 
 ```
-require('cake-dog')
+require("cake-dog")
 ```
 
 Now use `cake` command to see new tasks
@@ -26,6 +26,12 @@ cake watch                # real-time compile coffee scripts to javascript files
 cake stop                 # stop compile coffee scripts to javascript files
 cake generate             # once compile coffee scripts to javascript files
 
+```
+
+# Uninstall
+
+```
+npm rm cake-dog
 ```
 
 Done!
