@@ -22,9 +22,9 @@ Now use `cake` command to see new tasks
 $ cake
 Cakefile defines the following tasks:
 
-cake watch                # real-time compile coffee scripts to javascript files
-cake stop                 # stop compile coffee scripts to javascript files
-cake generate             # once compile coffee scripts to javascript files
+cake compile                      # once compile coffee scripts to javascript files
+cake compile:watch                # real-time compile coffee scripts to javascript files
+cake compile:stop                 # stop compile coffee scripts to javascript files
 
 ```
 
