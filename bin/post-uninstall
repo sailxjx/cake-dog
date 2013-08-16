@@ -1,9 +1,16 @@
 #!/bin/bash
 
 CAKEFILE="$(pwd)/../../Cakefile"
+IGNOREFILE="$(pwd)/../../.gitignore"
 
 [[ ! -f ${CAKEFILE} ]] && exit 0
 
 CAKETMP=$(grep -v 'require("cake-dog")' ${CAKEFILE})
 
 echo ${CAKETMP} > ${CAKEFILE}
+
+[[ ! -f ${IGNOREFILE} ]] && exit 0
+
+IGNORETMP=$(grep -v '/.compile.pid' ${IGNOREFILE})
+
+echo ${IGNORETMP} > ${IGNOREFILE}

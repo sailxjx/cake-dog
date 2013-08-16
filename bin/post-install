@@ -1,7 +1,14 @@
 #!/bin/bash
 
 CAKEFILE="$(pwd)/../../Cakefile"
+IGNOREFILE="$(pwd)/../../.gitignore"
+
+function prepend {
+    grep "$1" $2 1>/dev/null || echo "$3" | cat - $2 | tee 1>/dev/null $2
+}
 
 [[ ! -f ${CAKEFILE} ]] && touch ${CAKEFILE}
 
-grep "cake-dog" ${CAKEFILE} 1>/dev/null || echo 'require("cake-dog")' | cat - ${CAKEFILE} | tee 1>/dev/null ${CAKEFILE}
+prepend 'cake-dog' ${CAKEFILE} 'require("cake-dog")'
+
+[[ -f ${IGNOREFILE} ]] && prepend '/.compile.pid' ${IGNOREFILE} '/.compile.pid' || exit 0

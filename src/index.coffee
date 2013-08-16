@@ -11,11 +11,11 @@ callback = (err, stdout, stderr) ->
     console.log stdout.toString().green
   process.exit()
 
-task 'watch', 'real-time compile coffee scripts to javascript files', (options) ->
-  exec("#{dogFile} watch", {timeout: 100}, callback)
+task 'compile', "once compile coffee scripts to javascript files", (options) ->
+  exec("#{dogFile} compile", callback)
 
-task 'unwatch', 'stop compile coffee scripts to javascript files', (options) ->
-  exec("#{dogFile} unwatch", callback)
+task 'compile:watch', 'real-time compile coffee scripts to javascript files', (options) ->
+  exec("#{dogFile} compile_watch", {timeout: 100}, callback)
 
-task 'generate', "once compile coffee scripts to javascript files", (options) ->
-  exec("#{dogFile} generate", callback)
+task 'compile:unwatch', 'stop compile coffee scripts to javascript files', (options) ->
+  exec("#{dogFile} compile_unwatch", callback)

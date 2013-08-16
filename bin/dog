@@ -3,7 +3,7 @@
 BASEPATH="$(dirname $0)/.."
 POSTFIX="/node_modules/coffee-script/bin/coffee"
 COFFEE="${BASEPATH}${POSTFIX}"
-PIDFILE='.coffee.pid'
+PIDFILE='.compile.pid'
 
 if [[ ! -f ${COFFEE} ]]; then
     if [[ ! -f "$(pwd)${POSTFIX}" ]]; then
@@ -14,39 +14,39 @@ if [[ ! -f ${COFFEE} ]]; then
     fi
 fi
 
-function watch {
-    echo 'watching'
+function compile_watch {
+    echo 'start watch'
     [[ -f ${PIDFILE} ]] && echo "error! pid file exist" && exit 2
     ${COFFEE} -w -o lib -c src 2>&1 1>/dev/null &
     echo $! > ${PIDFILE}
     [[ $? > 0 ]] && echo "error! coffee start failed" && exit 3
-    echo 'watched'
+    echo 'started'
 }
 
-function unwatch {
-    echo 'unwatching'
+function compile_unwatch {
+    echo 'stop watch'
     [ ! -f ${PIDFILE} ] && echo "error! no pid file found" && exit 2
-    kill $(cat ${PIDFILE}) && rm .coffee.pid
+    kill $(cat ${PIDFILE}) && rm ${PIDFILE}
     [[ $? > 0 ]] && echo "error! stop process error" && exit 3
-    echo "unwatched"
+    echo "stoped"
 }
 
-function generate {
-    echo 'generating'
+function compile {
+    echo 'compile'
     rm -rf lib/*
     ${COFFEE} -o lib -c src
-    echo 'generated'
+    echo 'compiled'
 }
 
 case $1 in
-    watch)
-        watch
+    compile)
+        compile
         ;;
-    unwatch)
-        unwatch
+    compile_watch)
+        compile_watch
         ;;
-    generate)
-        generate
+    compile_unwatch)
+        compile_unwatch
         ;;
     *)
         echo "function ${1} not found!" && exit 1
