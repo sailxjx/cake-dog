@@ -3,12 +3,12 @@ colors = require('colors')
 dogFile = "#{__dirname}/../bin/dog"
 
 callback = (err, stdout, stderr) ->
-  if err?
-    console.log err.toString().red
+  if err? or stderr.length > 0
+    console.log stderr.toString().trim().red if stderr.length > 0
     console.log 'Message:'.grey
-    console.log stdout.toString().red
+    console.log stdout.toString().trim().red
   else
-    console.log stdout.toString().green
+    console.log stdout.toString().trim().green
   process.exit()
 
 task 'compile', "once compile coffee scripts to javascript files", (options) ->
