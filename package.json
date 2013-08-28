@@ -1,6 +1,6 @@
 {
   "name": "cake-dog",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "a little dog to watch, compile your coffee files",
   "main": "lib/index.js",
   "scripts": {
@@ -18,7 +18,10 @@
     "task"
   ],
   "author": "sailxjx",
-  "license": "MIT (sailxjx.mit-license.org)",
+  "license": {
+    "type": "MIT",
+    "url": "http://sailxjx.mit-license.org"
+  },
   "bugs": {
     "url": "https://github.com/sailxjx/cake-dog/issues"
   },
