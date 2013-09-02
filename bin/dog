@@ -39,14 +39,8 @@ function compile {
 }
 
 case $1 in
-    compile)
-        compile
-        ;;
-    compile_watch)
-        compile_watch
-        ;;
-    compile_unwatch)
-        compile_unwatch
+    compile|compile_watch|compile_unwatch)
+        $1 
         ;;
     *)
         echo "function ${1} not found!" && exit 1
