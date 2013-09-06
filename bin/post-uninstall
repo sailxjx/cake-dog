@@ -7,10 +7,10 @@ IGNOREFILE="$(pwd)/../../.gitignore"
 
 CAKETMP=$(grep -v 'require("cake-dog")' ${CAKEFILE})
 
-echo ${CAKETMP} > ${CAKEFILE}
+echo -e "${CAKETMP}" > ${CAKEFILE}
 
 [[ ! -f ${IGNOREFILE} ]] && exit 0
 
 IGNORETMP=$(grep -v '/.compile.pid' ${IGNOREFILE})
 
-echo ${IGNORETMP} > ${IGNOREFILE}
+echo -e "${IGNORETMP}" > ${IGNOREFILE}
