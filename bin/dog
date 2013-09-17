@@ -16,7 +16,15 @@ fi
 
 function compile_watch {
     echo 'start watch'
-    [[ -f ${PIDFILE} ]] && echo "error! pid file exist" && exit 2
+    if [[ -f ${PIDFILE} ]]; then
+        PS=$(ps -p $(cat ${PIDFILE}) | grep -v 'grep' | grep 'cake-dog')
+        if [[ $PS == '' ]]; then
+            echo "process was exited unexpectedly last time"
+        else
+            echo "error! pid file exist"
+            exit 2
+        fi
+    fi
     ${COFFEE} -w -o lib -c src 2>&1 1>/dev/null &
     echo $! > ${PIDFILE}
     [[ $? > 0 ]] && echo "error! coffee start failed" && exit 3
@@ -40,7 +48,7 @@ function compile {
 
 case $1 in
     compile|compile_watch|compile_unwatch)
-        $1 
+        $1
         ;;
     *)
         echo "function ${1} not found!" && exit 1

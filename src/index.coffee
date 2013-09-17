@@ -1,4 +1,4 @@
-exec = require('child_process').exec
+{exec} = require('child_process')
 colors = require('colors')
 dogFile = "#{__dirname}/../bin/dog"
 
