@@ -2,7 +2,7 @@
   "name": "cake-dog",
   "version": "0.1.15",
   "description": "A little dog to watch, compile your coffee files",
-  "main": "lib/index.js",
+  "main": "lib",
   "scripts": {
     "postinstall": "./bin/post-install",
     "postuninstall": "./bin/post-uninstall"
