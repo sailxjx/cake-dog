@@ -6,14 +6,15 @@ pidFile = path.resolve('.compile.pid')
 
 task 'compile', "once compile coffee scripts to javascript files", (options) ->
   child = fork(path.resolve(__dirname, 'cake-dog'), ['-o', 'lib', '-c', 'src'])
-  if child.pid?
-    console.log 'Compile finish'.green
-  else
-    console.log 'Error! Compile error'.red
+  child.on 'exit', (err) ->
+    if err
+      console.log 'Error! Compile error'.red
+    else
+      console.log 'Compile finish'.green
 
 task 'compile:watch', 'real-time compile coffee scripts to javascript files', (options) ->
   _watch = ->
-    child = fork(path.resolve(__dirname, 'cake-dog'), ['-w', '-o', 'lib', '-c', 'src'])
+    child = fork(path.resolve(__dirname, 'cake-dog'), ['quiet', '-w', '-o', 'lib', '-c', 'src'])
     fs.writeFile pidFile, child.pid, (err, result) ->
       console.log "Start watching in process: #{child.pid}".green
       process.exit()
