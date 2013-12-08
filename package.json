@@ -1,6 +1,6 @@
 {
   "name": "cake-dog",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A little dog to watch, compile your coffee files",
   "main": "lib",
   "scripts": {
