@@ -26,7 +26,7 @@
     "url": "https://github.com/sailxjx/cake-dog/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.6.3",
-    "colors": "~0.6.1"
+    "colors": "~0.6.1",
+    "coffee-script": "~1.7.1"
   }
 }
