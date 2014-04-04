@@ -35,6 +35,10 @@ npm rm cake-dog
 
 Done!
 
+# Known Issues
+* `Error: watch EMFILE` when use `cake compile:watch`
+  This is caused by the limit of the use of system-wide resources in *nix system, you can increase the limitation by `ulimit -n XXXX` and this message will not show again, the `XXXX` is the number of limitation, set it greater than your watched file number.
+
 # LICENSE
 
 Copyright © 2013 Tristan Xu, http://sailxjx.github.io <sailxjx@gmail.com>
