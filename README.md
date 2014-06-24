@@ -35,6 +35,11 @@ npm rm cake-dog
 
 Done!
 
+# TODO
+* install cakedog as a global package and run in cli mode
+* auto save the latest watch directories, and resurrect after reboot
+* add options to watch directories
+
 # Known Issues
 * `Error: watch EMFILE` when use `cake compile:watch`
   This is caused by the limit of the use of system-wide resources in *nix system, you can increase the limitation by `ulimit -n XXXX` and this message will not show again, the `XXXX` is the number of limitation, set it greater than your watched file number.
