@@ -39,7 +39,7 @@ You can prepend one line in your [`Cakefile`](http://coffeescript.org/documentat
 require("cake-dog")
 ```
 
-Now use `cake` command to see new tasks
+Now use `cake` command to see new tasks, these cake tasks will compile the source code from 'src' to 'lib'
 
 ```
 $ cake
