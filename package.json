@@ -3,12 +3,11 @@
   "version": "0.3.0",
   "description": "A little dog to watch, compile your coffee files",
   "main": "lib/cake.js",
-  "scripts": {
-    "postinstall": "./bin/post-install",
-    "postuninstall": "./bin/post-uninstall"
-  },
   "bin": {
     "cakedog": "./bin/cakedog"
+  },
+  "scripts": {
+    "test": "make test"
   },
   "preferGlobal": "true",
   "repository": {
