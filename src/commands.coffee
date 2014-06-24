@@ -76,6 +76,7 @@ exports.unwatch = (options = {}) ->
         console.warn 'Watcher has already stopped'.yellow
       when 'RUNNING'
         process.kill pid, 'SIGTERM'
+        console.log "Watcher #{pid} is stopped".green
     _removeWatcher source
 
 exports.resurrect = (callback = ->) ->

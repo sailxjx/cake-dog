@@ -43,11 +43,11 @@ testunwatch() {
   rm -rf lib/*
 
   $cakedog watch -s src -o lib
-  sleep 0.2
+  sleep 0.5
   pid=`node ./readpid.js $(pwd)/src`
 
   $cakedog unwatch -s src
-  sleep 0.2
+  sleep 0.5
   ps -p $pid
   [[ $? != 0 ]]
 }
@@ -56,16 +56,16 @@ should 'kill the process and unwatch file changes' testunwatch
 
 testresurrect() {
   $cakedog watch -s src -o lib
-  sleep 0.2
+  sleep 0.5
   pid=`node ./readpid.js $(pwd)/src`
 
   kill $pid
   $cakedog resurrect
-  sleep 0.2
+  sleep 0.5
   pid1=`node ./readpid.js $(pwd)/src`
   [[ $pid1 != 0 ]] && ps -p $pid1
   alive=$?
-  [[ $pid1 != 0 ]] && kill $pid1
+  $cakedog unwatch -s "$(pwd)/src"
   [[ alive != 0 ]] && [[ $pid != $pid1 ]]
 }
 

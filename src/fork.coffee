@@ -7,7 +7,7 @@ Notifier = require 'node-notifier'
 notifier = new Notifier
 
 fork = ->
-  process.title = "cake-dog: #{path.basename(process.cwd())}"
+  process.title = "cake-dog: #{process.cwd()}"
   coffee.on 'failure', (err) -> notifier.notify
     title: 'Compile Error!'
     message: err.toString()

@@ -8,8 +8,8 @@ _commonOptions =
 task 'compile', "once compile coffee scripts to javascript files", (options) ->
   commands.compile _commonOptions
 
-task 'compile:watch', 'real-time compile coffee scripts to javascript files', (options) ->
-  commands.watch _commonOptions
+task 'watch', 'real-time compile coffee scripts to javascript files', (options) ->
+  commands.watch _commonOptions, process.exit
 
-task 'compile:unwatch', 'stop compile coffee scripts to javascript files', (options) ->
+task 'unwatch', 'stop compile coffee scripts to javascript files', (options) ->
   commands.unwatch _commonOptions
