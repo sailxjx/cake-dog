@@ -1,45 +1,76 @@
-# Cake Dog
+Cake Dog
+---
+A watcher help you compiling CoffeeScript files
+[![build status](https://api.travis-ci.org/sailxjx/cake-dog.png)](https://travis-ci.org/sailxjx/cake-dog)
 
-A little dog help you to watch, compile your coffee files
-
-# Install
-
+## Install
 ```
-npm install cake-dog
+[sudo] npm install -g cake-dog
 ```
 
-# Usage
+## Usage
 
-Npm will automatically prepend one line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
+### Cli mode
+You can use `cakedog` as a command-line tool
+```
+$ cakedog --help
+
+  Usage: cakedog [options] <command>
+
+  Commands:
+
+    compile                compile to JavaScript and save as .js files
+    watch                  watch for the file changes and compile to .js files
+    unwatch                stop watch for the file changes
+    resurrect              resurrect previously watched processes
+
+  Options:
+
+    -h, --help             output usage information
+    -V, --version          output the version number
+    -o, --output <output>  set the output directory for compiled JavaScript
+    -s, --source <source>  set the source directory for CoffeeScript
+```
+
+### In Cakefile
+You can prepend one line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
 
 ```
 require("cake-dog")
 ```
 
-Now use `cake` command to see new tasks
+Now use `cake` command to see new tasks, these cake tasks will compile the source code from 'src' to 'lib'
 
 ```
 $ cake
 Cakefile defines the following tasks:
 
-cake compile              # once compile coffee scripts to javascript files
-cake compile:watch        # real-time compile coffee scripts to javascript files
-cake compile:unwatch      # stop compile coffee scripts to javascript files
+cake compile      # once compile coffee scripts to javascript files
+cake watch        # real-time compile coffee scripts to javascript files
+cake unwatch      # stop compile coffee scripts to javascript files
 ```
 
-# Uninstall
+## Uninstall
 
 ```
-npm rm cake-dog
+[sudo] npm rm -g cake-dog
 ```
+
+And don't forget to remove the `require("cake-dog")` in your Cakefile (if you have done this).
 
 Done!
 
-# Known Issues
+## ChangeLog
+### v0.4.0
+* install cakedog as a global package and run in cli mode
+* auto save the latest watch directories, and resurrect after reboot
+* add options to watch directories
+
+## Known Issues
 * `Error: watch EMFILE` when use `cake compile:watch`
   This is caused by the limit of the use of system-wide resources in *nix system, you can increase the limitation by `ulimit -n XXXX` and this message will not show again, the `XXXX` is the number of limitation, set it greater than your watched file number.
 
-# LICENSE
+## LICENSE
 
 Copyright © 2013 Tristan Xu, http://sailxjx.github.io <sailxjx@gmail.com>
 

@@ -2,11 +2,14 @@
   "name": "cake-dog",
   "version": "0.3.0",
   "description": "A little dog to watch, compile your coffee files",
-  "main": "lib",
-  "scripts": {
-    "postinstall": "./bin/post-install",
-    "postuninstall": "./bin/post-uninstall"
+  "main": "lib/cake.js",
+  "bin": {
+    "cakedog": "./bin/cakedog"
   },
+  "scripts": {
+    "test": "make test"
+  },
+  "preferGlobal": "true",
   "repository": {
     "type": "git",
     "url": "git@github.com:sailxjx/cake-dog"
@@ -17,7 +20,11 @@
     "nodejs",
     "task"
   ],
-  "author": "sailxjx",
+  "author": {
+    "name": "Xu Jingxin",
+    "email": "sailxjx@gmail.com",
+    "url": "http://sailxjx.github.io/blog"
+  },
   "license": {
     "type": "MIT",
     "url": "http://sailxjx.mit-license.org"
@@ -27,6 +34,9 @@
   },
   "dependencies": {
     "colors": "~0.6.1",
-    "coffee-script": "~1.7.1"
+    "coffee-script": "~1.7.1",
+    "node-notifier": "^3.0.6",
+    "commander": "^2.2.0",
+    "mkdirp": "^0.5.0"
   }
 }
