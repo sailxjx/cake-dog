@@ -3,7 +3,7 @@ var path = require('path'),
     dumpfile;
 
 try {
-  dumpfile = require(path.join(process.env.HOME, '~/.cakedog.json'));
+  dumpfile = require(path.join(process.env.HOME, '.cakedog.json'));
 } catch (e) {
   dumpfile = {};
 }

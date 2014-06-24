@@ -7,6 +7,10 @@
     "postinstall": "./bin/post-install",
     "postuninstall": "./bin/post-uninstall"
   },
+  "bin": {
+    "cakedog": "./bin/cakedog"
+  },
+  "preferGlobal": "true",
   "repository": {
     "type": "git",
     "url": "git@github.com:sailxjx/cake-dog"
@@ -17,7 +21,11 @@
     "nodejs",
     "task"
   ],
-  "author": "sailxjx",
+  "author": {
+    "name": "Xu Jingxin",
+    "email": "sailxjx@gmail.com",
+    "url": "http://sailxjx.github.io/blog"
+  },
   "license": {
     "type": "MIT",
     "url": "http://sailxjx.mit-license.org"
@@ -30,7 +38,6 @@
     "coffee-script": "~1.7.1",
     "node-notifier": "^3.0.6",
     "commander": "^2.2.0",
-    "lodash": "^2.4.1",
     "mkdirp": "^0.5.0"
   }
 }

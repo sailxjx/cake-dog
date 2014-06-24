@@ -1,5 +1,4 @@
 commander = require 'commander'
-_ = require 'lodash'
 pkg = require '../package.json'
 commands = require './commands'
 
@@ -11,19 +10,19 @@ cli = ->
 
   commander.command 'compile'
     .description 'compile to JavaScript and save as .js files'
-    .action -> commands.compile _.last(arguments).parent
+    .action -> commands.compile arguments[arguments.length - 1].parent
 
   commander.command 'watch'
     .description 'watch for the file changes and compile to .js files'
-    .action -> commands.watch _.last(arguments).parent
+    .action -> commands.watch arguments[arguments.length - 1].parent, process.exit
 
   commander.command 'unwatch'
     .description 'stop watch for the file changes'
-    .action -> commands.unwatch _.last(arguments).parent
+    .action -> commands.unwatch arguments[arguments.length - 1].parent
 
   commander.command 'resurrect'
     .description 'resurrect previously watched processes'
-    .action -> commands.unwatch _.last(arguments).parent
+    .action -> commands.resurrect process.exit
 
   commander.parse process.argv
 

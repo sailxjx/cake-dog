@@ -32,8 +32,41 @@ testwatch() {
   rm -rf lib/*
   $cakedog watch -s src -o lib
   pid=`node ./readpid.js $(pwd)/src`
-  echo $pid
-  # [[ -f lib/test.js ]]
+  sleep 0.2
+  [[ $pid != 0 ]] && kill $pid
+  [[ $pid != 0 ]] && [[ -f lib/test.js ]]
 }
 
 should 'watch for the file change and compile' testwatch
+
+testunwatch() {
+  rm -rf lib/*
+
+  $cakedog watch -s src -o lib
+  sleep 0.2
+  pid=`node ./readpid.js $(pwd)/src`
+
+  $cakedog unwatch -s src
+  sleep 0.2
+  ps -p $pid
+  [[ $? != 0 ]]
+}
+
+should 'kill the process and unwatch file changes' testunwatch
+
+testresurrect() {
+  $cakedog watch -s src -o lib
+  sleep 0.2
+  pid=`node ./readpid.js $(pwd)/src`
+
+  kill $pid
+  $cakedog resurrect
+  sleep 0.2
+  pid1=`node ./readpid.js $(pwd)/src`
+  [[ $pid1 != 0 ]] && ps -p $pid1
+  alive=$?
+  [[ $pid1 != 0 ]] && kill $pid1
+  [[ alive != 0 ]] && [[ $pid != $pid1 ]]
+}
+
+should 'resurrect all watchers' testresurrect

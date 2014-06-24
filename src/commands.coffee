@@ -5,7 +5,7 @@ colors = require 'colors'
 coffeeCmd = require 'coffee-script/lib/coffee-script/command'
 {exec, fork} = require 'child_process'
 
-dumpfile = path.join process.env.HOME, '~/.cakedog.json'
+dumpfile = path.join process.env.HOME, '.cakedog.json'
 try
   dump = require dumpfile
 catch e
@@ -22,15 +22,16 @@ _parseOptions = (options = {}) ->
   options.output = output
   return options
 
-_checkWatcher = (pid, callback) ->
-  return callback() unless pid?
+_checkWatcherStatus = (pid, callback) ->
   exec "ps -p #{pid} | grep -v 'grep' | grep 'cake-dog'", (err, result) ->
     if err? or result?.trim().length < 1
-      console.error "Warn! Watcher #{pid} was exited unexpectedly last time".yellow
-      callback()
+      callback('QUITED')
     else
-      console.error "Error! Watcher is running now".red
-      callback(new Error('WATHER_RUNNING'))
+      callback('RUNNING')
+
+_removeWatcher = (source) ->
+  delete dump[source]
+  fs.writeFileSync dumpfile, JSON.stringify(dump, null, 2)
 
 exports.compile = (options = {}) ->
   {output, source} = _parseOptions options
@@ -39,11 +40,11 @@ exports.compile = (options = {}) ->
   coffeeCmd.run()
   console.log 'Compile finish'.green
 
-exports.watch = (options = {}) ->
+exports.watch = (options = {}, callback = ->) ->
   {output, source} = _parseOptions options
   pid = dump[source]?.pid
-  _checkWatcher pid, (err) ->
-    return if err?
+
+  _watch = ->
     process.chdir source
     child = fork(path.resolve(__dirname, 'fork'), ['-w', '-o', output, '-c', source])
     dump[source] =
@@ -52,8 +53,35 @@ exports.watch = (options = {}) ->
       output: output
     fs.writeFileSync dumpfile, JSON.stringify(dump, null, 2)
     console.log "Watching #{source}, pid: #{child.pid}".green
-    process.exit()
+    return callback()
+
+  return _watch() unless pid?
+
+  _checkWatcherStatus pid, (status) ->
+    switch status
+      when 'QUITED'
+        console.warn "Watcher #{pid} was exited unexpectedly last time".yellow
+        _watch()
+      when 'RUNNING'
+        console.error "Watcher is running now".red
+        callback()
 
 exports.unwatch = (options = {}) ->
+  {source} = _parseOptions options
+  pid = dump[source]?.pid
+  return console.error 'The watcher is never runned!'.red unless pid?
+  _checkWatcherStatus pid, (status) ->
+    switch status
+      when 'QUITED'
+        console.warn 'Watcher has already stopped'.yellow
+      when 'RUNNING'
+        process.kill pid, 'SIGTERM'
+    _removeWatcher source
 
-exports.resurrect = (options = {}) ->
+exports.resurrect = (callback = ->) ->
+  num = Object.keys(dump).length
+  return console.warn 'No watcher exists'.yellow unless num > 0
+  for k, options of dump
+    exports.watch options, ->
+      num -= 1
+      return callback() if num is 0
