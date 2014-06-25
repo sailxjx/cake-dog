@@ -63,7 +63,7 @@ exports.watch = (options = {}, callback = ->) ->
         console.warn "Watcher #{pid} was exited unexpectedly last time".yellow
         _watch()
       when 'RUNNING'
-        console.error "Watcher is running now".red
+        console.error "Watcher #{pid} is running now".red
         callback()
 
 exports.unwatch = (options = {}) ->
