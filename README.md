@@ -1,6 +1,7 @@
 Cake Dog
 ---
-A watcher help you compiling CoffeeScript files
+A loyal friend help for watching your CoffeeScript files
+
 [![build status](https://api.travis-ci.org/sailxjx/cake-dog.png)](https://travis-ci.org/sailxjx/cake-dog)
 
 ## Install
