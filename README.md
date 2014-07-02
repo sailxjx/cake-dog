@@ -37,10 +37,12 @@ $ cakedog --help
 You can prepend one line in your [`Cakefile`](http://coffeescript.org/documentation/docs/cake.html)
 
 ```
-require("cake-dog")
+require("cake-dog")(options)
 ```
 
-Now use `cake` command to see new tasks, these cake tasks will compile the source code from 'src' to 'lib'
+Now use `cake` command to see new tasks, these cake tasks will compile the source code from 'source' to 'output'
+
+The default options is {source: 'src', output: 'lib'}
 
 ```
 $ cake
@@ -62,6 +64,9 @@ And don't forget to remove the `require("cake-dog")` in your Cakefile (if you ha
 Done!
 
 ## ChangeLog
+### v0.4.1
+* support options in Cakefile
+
 ### v0.4.0
 * install cakedog as a global package and run in cli mode
 * auto save the latest watch directories, and resurrect after reboot
