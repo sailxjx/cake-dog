@@ -1,15 +1,19 @@
 path = require 'path'
 commands = require './commands'
 
-_commonOptions =
-  output: path.resolve 'lib'
-  source: path.resolve 'src'
+cakedog = (options = {}) ->
+  {output, source} = options
+  _options =
+    output: path.resolve output or 'lib'
+    source: path.resolve source or 'src'
 
-task 'compile', "once compile coffee scripts to javascript files", (options) ->
-  commands.compile _commonOptions
+  task 'compile', "once compile coffee scripts to javascript files", (options) ->
+    commands.compile _options
 
-task 'watch', 'real-time compile coffee scripts to javascript files', (options) ->
-  commands.watch _commonOptions, process.exit
+  task 'watch', 'real-time compile coffee scripts to javascript files', (options) ->
+    commands.watch _options, process.exit
 
-task 'unwatch', 'stop compile coffee scripts to javascript files', (options) ->
-  commands.unwatch _commonOptions
+  task 'unwatch', 'stop compile coffee scripts to javascript files', (options) ->
+    commands.unwatch _options
+
+module.exports = cakedog

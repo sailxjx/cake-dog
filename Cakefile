@@ -1,1 +1,1 @@
-require('./lib/cake.js')
+require('./lib/cake.js')()
