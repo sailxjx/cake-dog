@@ -23,6 +23,7 @@ $ cakedog --help
     compile                compile to JavaScript and save as .js files
     watch                  watch for the file changes and compile to .js files
     unwatch                stop watch for the file changes
+    kill                   stop all watchers
     resurrect              resurrect previously watched processes
 
   Options:
@@ -64,16 +65,20 @@ And don't forget to remove the `require("cake-dog")` in your Cakefile (if you ha
 Done!
 
 ## ChangeLog
-### v0.4.1
-* support options in Cakefile
+### 0.4.2
+- unwatch now support kill process by path name. It kills each process which contain the name in path.
+- support `kill` command
 
-### v0.4.0
-* install cakedog as a global package and run in cli mode
-* auto save the latest watch directories, and resurrect after reboot
-* add options to watch directories
+### 0.4.1
+- support options in Cakefile
+
+### 0.4.0
+- install cakedog as a global package and run in cli mode
+- auto save the latest watch directories, and resurrect after reboot
+- add options to watch directories
 
 ## Known Issues
-* `Error: watch EMFILE` when use `cake compile:watch`
+- `Error: watch EMFILE` when use `cake watch`
   This is caused by the limit of the use of system-wide resources in *nix system, you can increase the limitation by `ulimit -n XXXX` and this message will not show again, the `XXXX` is the number of limitation, set it greater than your watched file number.
 
 ## LICENSE

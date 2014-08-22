@@ -33,6 +33,17 @@ _removeWatcher = (source) ->
   delete dump[source]
   fs.writeFileSync dumpfile, JSON.stringify(dump, null, 2)
 
+_unwatch = (source) ->
+  pid = dump[source].pid
+  _checkWatcherStatus pid, (status) ->
+    switch status
+      when 'QUITED'
+        console.warn 'Watcher has already stopped'.yellow
+      when 'RUNNING'
+        process.kill pid, 'SIGTERM'
+        console.log "Watcher #{pid} is stopped".green
+    _removeWatcher source
+
 exports.compile = (options = {}) ->
   {output, source} = _parseOptions options
   [a1, a2] = process.argv
@@ -66,18 +77,23 @@ exports.watch = (options = {}, callback = ->) ->
         console.error "Watcher #{pid} is running now".red
         callback()
 
-exports.unwatch = (options = {}) ->
+exports.unwatch = (name, options = {}) ->
+  if toString.call(name) is '[object Object]'
+    options = name
+    name = null
   {source} = _parseOptions options
-  pid = dump[source]?.pid
-  return console.error 'The watcher is never runned!'.red unless pid?
-  _checkWatcherStatus pid, (status) ->
-    switch status
-      when 'QUITED'
-        console.warn 'Watcher has already stopped'.yellow
-      when 'RUNNING'
-        process.kill pid, 'SIGTERM'
-        console.log "Watcher #{pid} is stopped".green
-    _removeWatcher source
+  sources = Object.keys(dump).filter (_source) ->
+    if (source is _source or _source.indexOf(name) isnt -1) and dump[_source].pid?
+      return true
+    else
+      return false
+  return console.error 'The watcher is never runned!'.red unless sources.length?
+  sources.forEach _unwatch
+
+exports.kill = ->
+  sources = Object.keys(dump)
+  return console.error 'The watcher is never runned!'.red unless sources.length?
+  sources.forEach _unwatch
 
 exports.resurrect = (callback = ->) ->
   num = Object.keys(dump).length

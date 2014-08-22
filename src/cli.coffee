@@ -18,7 +18,14 @@ cli = ->
 
   commander.command 'unwatch'
     .description 'stop watch for the file changes'
-    .action -> commands.unwatch arguments[arguments.length - 1].parent
+    .action ->
+      last = arguments.length - 1
+      arguments[last] = arguments[last].parent
+      commands.unwatch.apply commands, arguments
+
+  commander.command 'kill'
+    .description 'stop all watchers'
+    .action -> commands.kill()
 
   commander.command 'resurrect'
     .description 'resurrect previously watched processes'

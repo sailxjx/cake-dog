@@ -56,6 +56,38 @@ testunwatch() {
 
 should 'kill the process and unwatch file changes' testunwatch
 
+testunwatchbyname() {
+  rm -rf lib/*
+
+  $cakedog watch -s src -o lib
+  sleep 0.2
+
+  pid=`node ./readpid.js $(pwd)/src`
+  $cakedog unwatch cake
+  sleep 0.2
+
+  ps -p $pid
+  [[ $? != 0 ]] && sleep 0.2
+}
+
+should 'kill the process by path name and unwatch file changes' testunwatchbyname
+
+testkill() {
+  rm -rf lib/*
+
+  $cakedog watch -s src -o lib
+  sleep 0.2
+
+  pid=`node ./readpid.js $(pwd)/src`
+  $cakedog kill
+  sleep 0.2
+
+  ps -p $pid
+  [[ $? != 0 ]] && sleep 0.2
+}
+
+should 'kill all cakedog processes' testkill
+
 testresurrect() {
   $cakedog watch -s src -o lib
   sleep 0.2
