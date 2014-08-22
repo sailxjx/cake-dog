@@ -2,7 +2,7 @@ Cake Dog
 ---
 A loyal friend help for watching your CoffeeScript files
 
-[![build status](https://api.travis-ci.org/sailxjx/cake-dog.png)](https://travis-ci.org/sailxjx/cake-dog)
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
 
 ## Install
 ```
@@ -102,3 +102,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[npm-url]: https://npmjs.org/package/cake-dog
+[npm-image]: http://img.shields.io/npm/v/cake-dog.svg
+
+[travis-url]: https://travis-ci.org/sailxjx/cake-dog
+[travis-image]: http://img.shields.io/travis/sailxjx/cake-dog.svg
