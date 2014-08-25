@@ -1,6 +1,6 @@
 {
   "name": "cake-dog",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "A loyal friend help for watching your CoffeeScript files",
   "main": "lib/cake.js",
   "bin": {
