@@ -56,7 +56,6 @@ exports.watch = (options = {}, callback = ->) ->
   pid = dump[source]?.pid
 
   _watch = ->
-    process.chdir source
     child = fork(path.resolve(__dirname, 'fork'), ['-w', '-o', output, '-c', source])
     dump[source] =
       pid: child.pid
