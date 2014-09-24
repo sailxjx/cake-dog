@@ -65,6 +65,10 @@ And don't forget to remove the `require("cake-dog")` in your Cakefile (if you ha
 Done!
 
 ## ChangeLog
+
+### 0.4.5
+- set the forked process title to source directory
+
 ### 0.4.4
 - update coffee-script version
 - bugfix in cli mode
